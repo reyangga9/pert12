@@ -1,0 +1,67 @@
+import { Box, Button, TextField, Typography } from "@mui/material";
+import React from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+
+function ReduxContainer() {
+  // useSelector ini menerima sebuah fungsi dengan satu parameter "state"
+  // anggap saja ini seperti "filter"
+  // ini digunakan untuk menmapilkan username
+  // const username = useSelector(function (state) {
+  //   return state.user;
+  // });
+  //   ini digunakan untuk menampilkan value counter
+  const counter = useSelector(function (state) {
+    return state.counter;
+  });
+
+  const dispatcher = useDispatch();
+  return (
+    <Box sx={{ border: "black 1px solid", m: 2 }}>
+      <Typography sx={{ p: 2 }} variant="h4">
+        React Redux
+      </Typography>
+      <Box sx={{ p: 4 }}>
+        <TextField
+          id="outlined-basic"
+          label="Current Counter"
+          variant="outlined"
+          value={counter}
+        ></TextField>
+        <Box sx={{ display: "flex", gap: "1.5em", mt: 2 }}>
+          {/* Decrement */}
+          <Button
+            variant="outlined"
+            onClick={() => {
+              dispatcher({ type: "decrement" });
+            }}
+          >
+            -1
+          </Button>
+
+          {/* reset */}
+          <Button
+            variant="outlined"
+            onClick={() => {
+              dispatcher({ type: "reset" });
+            }}
+          >
+            0
+          </Button>
+
+          {/* Increment */}
+          <Button
+            variant="outlined"
+            onClick={() => {
+              dispatcher({ type: "increment" });
+            }}
+          >
+            +1
+          </Button>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
+export default ReduxContainer;
